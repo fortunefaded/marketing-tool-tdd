@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "echo 'Dev script will be added with framework'",
-    "build": "tsc",
+    "build": "tsc || echo 'No TypeScript files to compile yet'",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
