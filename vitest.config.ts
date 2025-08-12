@@ -1,5 +1,5 @@
 import { defineConfig } from 'vitest/config'
-import path from 'path'
+import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
   test: {
@@ -15,15 +15,15 @@ export default defineConfig({
         '*.config.js',
         'tests/**',
         '**/*.test.ts',
-        '**/*.spec.ts'
-      ]
+        '**/*.spec.ts',
+      ],
     },
     include: ['src/**/*.{test,spec}.{js,ts}', 'tests/**/*.{test,spec}.{js,ts}'],
-    watchExclude: ['node_modules', 'dist']
+    watchExclude: ['node_modules', 'dist'],
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
-    }
-  }
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
 })
