@@ -25,13 +25,38 @@ npm test
 
 ## 開発コマンド
 
-npm run dev # 開発サーバー起動
-npm run test # テスト実行
-npm run test:ui # Vitest UI
+```bash
+npm run dev           # 開発サーバー起動
+npm run test          # テスト実行
+npm run test:ui       # Vitest UI
 npm run test:coverage # カバレッジ
-npm run lint # ESLint
-npm run format # Prettier
-npm run type-check # TypeScript型チェック
+npm run lint          # ESLint
+npm run format        # Prettier
+npm run type-check    # TypeScript型チェック
+npm run pre-check     # 基本チェック（型、lint、テスト）
+npm run pre-check:full # フルチェック（ビルド含む）
+npm run check-all     # 全チェック（CI/CDと同じ）
+```
+
+## 品質管理
+
+このプロジェクトでは、コード品質を保つために以下の自動チェックを実装しています：
+
+### Pre-commitフック
+コミット時に自動的に以下のチェックが実行されます：
+- TypeScript型チェック（ステージされたファイル）
+- ESLintによるコード品質チェック
+- Prettierによるフォーマットチェック
+- 関連するテストの実行
+
+### Pre-pushフック
+プッシュ前に以下のフルチェックが実行されます：
+- TypeScript型チェック（全ファイル）
+- ESLintチェック（全ファイル）
+- 全テストの実行
+- ビルドチェック
+
+これにより、GitHub Actionsでのエラーを事前に防ぎ、手戻りを最小限に抑えます。
 
 ## Serena MCP統合
 
