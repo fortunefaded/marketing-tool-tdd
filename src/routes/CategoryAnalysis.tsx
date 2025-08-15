@@ -237,114 +237,115 @@ export default function CategoryAnalysis() {
             </div>
           </div>
 
-          <div className="relative h-64 border border-gray-200 rounded">
-            <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
-              {/* Quadrant A */}
-              <div className="border-r border-b border-gray-200 bg-blue-50 flex items-center justify-center">
-                <span className="text-4xl font-bold text-gray-300">A</span>
+          <div className="grid grid-cols-2 gap-6">
+            {/* Chart Column */}
+            <div>
+              <div className="relative h-64 border border-gray-200 rounded">
+                <div className="absolute inset-0 grid grid-cols-2 grid-rows-2">
+                  {/* Quadrant A */}
+                  <div className="border-r border-b border-gray-200 bg-blue-50 flex items-center justify-center">
+                    <span className="text-4xl font-bold text-gray-300">A</span>
+                  </div>
+                  {/* Quadrant B */}
+                  <div className="border-b border-gray-200 bg-green-50 flex items-center justify-center">
+                    <span className="text-4xl font-bold text-gray-300">B</span>
+                  </div>
+                  {/* Quadrant C */}
+                  <div className="border-r border-gray-200 bg-orange-50 flex items-center justify-center">
+                    <span className="text-4xl font-bold text-gray-300">C</span>
+                  </div>
+                  {/* Quadrant D */}
+                  <div className="bg-red-50 flex items-center justify-center">
+                    <span className="text-4xl font-bold text-gray-300">D</span>
+                  </div>
+                </div>
+
+                {/* Data points */}
+                <div className="absolute inset-0">
+                  <div className="absolute" style={{ top: '75%', left: '15%' }}>
+                    <div className="w-12 h-12 bg-gray-400 rounded-full opacity-60"></div>
+                  </div>
+                  <div className="absolute" style={{ top: '60%', left: '35%' }}>
+                    <div className="w-10 h-10 bg-yellow-400 rounded-full opacity-60"></div>
+                  </div>
+                  <div className="absolute" style={{ top: '45%', left: '20%' }}>
+                    <div className="w-16 h-16 bg-green-400 rounded-full opacity-60"></div>
+                  </div>
+                  <div className="absolute" style={{ top: '30%', left: '70%' }}>
+                    <div className="w-8 h-8 bg-blue-400 rounded-full opacity-60"></div>
+                  </div>
+                  <div className="absolute" style={{ top: '85%', left: '55%' }}>
+                    <div className="w-6 h-6 bg-purple-400 rounded-full opacity-60"></div>
+                  </div>
+                  <div className="absolute" style={{ top: '65%', left: '85%' }}>
+                    <div className="w-10 h-10 bg-red-400 rounded-full opacity-60"></div>
+                  </div>
+                  <div className="absolute" style={{ top: '25%', left: '45%' }}>
+                    <div className="w-14 h-14 bg-orange-400 rounded-full opacity-60"></div>
+                  </div>
+                </div>
+
+                {/* Axis labels */}
+                <div className="absolute bottom-0 left-0 right-0 text-center text-xs text-gray-500 -mb-5">
+                  CVR（合計）（%）
+                </div>
+                <div className="absolute top-0 bottom-0 left-0 text-xs text-gray-500 -ml-16 flex items-center">
+                  <span className="transform -rotate-90">CV（合計）</span>
+                </div>
               </div>
-              {/* Quadrant B */}
-              <div className="border-b border-gray-200 bg-green-50 flex items-center justify-center">
-                <span className="text-4xl font-bold text-gray-300">B</span>
-              </div>
-              {/* Quadrant C */}
-              <div className="border-r border-gray-200 bg-orange-50 flex items-center justify-center">
-                <span className="text-4xl font-bold text-gray-300">C</span>
-              </div>
-              {/* Quadrant D */}
-              <div className="bg-red-50 flex items-center justify-center">
-                <span className="text-4xl font-bold text-gray-300">D</span>
+
+              <div className="mt-4 flex items-center justify-between">
+                <div className="flex items-center space-x-6 text-xs">
+                  <span className="text-gray-600">計27件（1～27件）</span>
+                  <button className="text-[#f6d856] hover:underline">1</button>
+                </div>
+
+                <div className="text-xs text-gray-600">
+                  <button className="text-[#f6d856] hover:underline">設定を変更</button>
+                </div>
               </div>
             </div>
 
-            {/* Data points */}
-            <div className="absolute inset-0">
-              <div className="absolute" style={{ top: '75%', left: '15%' }}>
-                <div className="w-12 h-12 bg-gray-400 rounded-full opacity-60"></div>
-              </div>
-              <div className="absolute" style={{ top: '60%', left: '35%' }}>
-                <div className="w-10 h-10 bg-yellow-400 rounded-full opacity-60"></div>
-              </div>
-              <div className="absolute" style={{ top: '45%', left: '20%' }}>
-                <div className="w-16 h-16 bg-green-400 rounded-full opacity-60"></div>
-              </div>
-              <div className="absolute" style={{ top: '30%', left: '70%' }}>
-                <div className="w-8 h-8 bg-blue-400 rounded-full opacity-60"></div>
-              </div>
-              <div className="absolute" style={{ top: '85%', left: '55%' }}>
-                <div className="w-6 h-6 bg-purple-400 rounded-full opacity-60"></div>
-              </div>
-              <div className="absolute" style={{ top: '65%', left: '85%' }}>
-                <div className="w-10 h-10 bg-red-400 rounded-full opacity-60"></div>
-              </div>
-              <div className="absolute" style={{ top: '25%', left: '45%' }}>
-                <div className="w-14 h-14 bg-orange-400 rounded-full opacity-60"></div>
-              </div>
-            </div>
-
-            {/* Axis labels */}
-            <div className="absolute bottom-0 left-0 right-0 text-center text-xs text-gray-500 -mb-5">
-              CVR（合計）（%）
-            </div>
-            <div className="absolute top-0 bottom-0 left-0 text-xs text-gray-500 -ml-16 flex items-center">
-              <span className="transform -rotate-90">CV（合計）</span>
-            </div>
-          </div>
-
-          <div className="mt-4 flex items-center justify-between">
-            <div className="flex items-center space-x-6 text-xs">
-              <span className="text-gray-600">計27件（1～27件）</span>
-              <button className="text-[#f6d856] hover:underline">1</button>
-            </div>
-
-            <div className="text-xs text-gray-600">
-              <button className="text-[#f6d856] hover:underline">設定を変更</button>
-            </div>
-          </div>
-
-          {/* Legend */}
-          <div className="mt-4 border-t pt-4">
-            <h3 className="text-sm font-medium text-gray-900 mb-2">グラフの表示項目</h3>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-                <span>GoogleAds/指名</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-                <span>LINE広告/オーディエンスセグメント</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                <span>Yahoo!スポンサードサーチ/指名</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
-                <span>GoogleAds/オーディエンス ターゲット</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-orange-400 rounded-full"></div>
-                <span>LINE広告/類似配信</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-                <span>GoogleAds/非指名</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
-                <span>アフィリエイト/[未登録]（未登録）</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-pink-400 rounded-full"></div>
-                <span>[自社媒体] メールマガジン/[未登録]</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-indigo-400 rounded-full"></div>
-                <span>Facebook/既存顧客</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-teal-400 rounded-full"></div>
-                <span>[未登録]/[未登録]</span>
+            {/* Legend Column */}
+            <div>
+              <h3 className="text-sm font-medium text-gray-900 mb-3">グラフの表示項目</h3>
+              <div className="space-y-2 text-xs">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                  <span>LINE広告/オーディエンスセグメント</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
+                  <span>GoogleAds/オーディエンス ターゲット</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                  <span>GoogleAds/指名</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-orange-400 rounded-full"></div>
+                  <span>Yahoo!スポンサードサーチ/指名</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
+                  <span>LINE広告/類似配信</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                  <span>[自社媒体] メールマガジン[未登録]</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
+                  <span>アフィリエイト/[未登録]（未登録）</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-pink-400 rounded-full"></div>
+                  <span>Facebook/既存顧客</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-indigo-400 rounded-full"></div>
+                  <span>[未登録]/[未登録]</span>
+                </div>
               </div>
             </div>
           </div>
