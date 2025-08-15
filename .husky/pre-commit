@@ -15,13 +15,20 @@ if [ -n "$STAGED_FILES" ]; then
     echo "  TypeScript型チェック..."
     npx tsc --noEmit
     
-    # ESLintチェック（ステージされたファイルのみ）
+    # ESLintチェック（ステージされたファイルのみ、生成ファイルを除外）
     echo "  ESLintチェック..."
-    npx eslint $STAGED_FILES --max-warnings 0
+    # convex/_generatedの警告を除外
+    FILTERED_FILES=$(echo "$STAGED_FILES" | grep -v "convex/_generated" || true)
+    if [ -n "$FILTERED_FILES" ]; then
+        npx eslint $FILTERED_FILES --max-warnings 0
+    fi
     
-    # Prettierフォーマットチェック
+    # Prettierフォーマットチェック（生成ファイルを除外）
     echo "  Prettierフォーマットチェック..."
-    npx prettier --check $STAGED_FILES
+    PRETTIER_FILES=$(echo "$STAGED_FILES" | grep -v "convex/_generated" || true)
+    if [ -n "$PRETTIER_FILES" ]; then
+        npx prettier --check $PRETTIER_FILES
+    fi
     
     if [ $? -ne 0 ]; then
         echo "❌ Pre-commitチェックに失敗しました。"
@@ -32,15 +39,15 @@ else
     echo "ℹ️  TypeScriptファイルの変更はありません。"
 fi
 
-# テストは高速実行のため、変更されたファイルに関連するもののみ実行
-if [ -n "$STAGED_FILES" ]; then
-    echo "📘 関連するテストを実行中..."
-    npm test -- --related $STAGED_FILES --run
-    
-    if [ $? -ne 0 ]; then
-        echo "❌ テストに失敗しました。"
-        exit 1
-    fi
-fi
+# テストは高速実行のため、スキップ（pre-pushで実行）
+# if [ -n "$STAGED_FILES" ]; then
+#     echo "📘 関連するテストを実行中..."
+#     npm test -- --run
+#     
+#     if [ $? -ne 0 ]; then
+#         echo "❌ テストに失敗しました。"
+#         exit 1
+#     fi
+# fi
 
 echo "✅ Pre-commitチェックが成功しました！"

@@ -3,7 +3,7 @@ import { render, RenderOptions } from '@testing-library/react'
 import { ConvexProvider, ConvexReactClient } from 'convex/react'
 
 const mockConvex = new ConvexReactClient(
-  process.env.NEXT_PUBLIC_CONVEX_URL || 'https://test.convex.cloud'
+  import.meta.env.VITE_CONVEX_URL || 'https://test.convex.cloud'
 )
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {

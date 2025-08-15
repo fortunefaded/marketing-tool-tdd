@@ -53,7 +53,7 @@ export default [
       'convex/_generated/**',
       '.serena/**',
       'coverage/**',
-      '.convex/**'
+      '.convex/**',
     ],
   },
 ]

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useQuery, useMutation } from 'convex/react'
+import { Id } from 'convex/_generated/dataModel'
 import { api } from '../../convex/_generated/api'
 import { useState } from 'react'
 import { useVibeLogger } from '../hooks/useVibeLogger'
@@ -41,7 +42,7 @@ export default function Campaigns() {
       await createCampaign({
         title,
         description,
-        userId: 'temp-user-id' as const, // 仮のユーザーID
+        userId: 'temp-user-id' as Id<'users'>, // 仮のユーザーID
       })
 
       story.chapter('フォームリセット')

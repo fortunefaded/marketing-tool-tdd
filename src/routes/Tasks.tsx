@@ -1,5 +1,6 @@
 import React from 'react'
 import { useQuery, useMutation } from 'convex/react'
+import { Id } from 'convex/_generated/dataModel'
 import { api } from '../../convex/_generated/api'
 import { useState } from 'react'
 import { useVibeLogger } from '../hooks/useVibeLogger'
@@ -44,8 +45,8 @@ export default function Tasks() {
       await createTask({
         title: newTask.title,
         description: newTask.description,
-        campaignId: 'temp-campaign-id' as const, // 仮のキャンペーンID
-        assignedTo: 'temp-user-id' as const, // 仮のユーザーID
+        campaignId: 'temp-campaign-id' as Id<'campaigns'>, // 仮のキャンペーンID
+        assignedTo: 'temp-user-id' as Id<'users'>, // 仮のユーザーID
         dueDate: newTask.dueDate || undefined,
       })
 
@@ -71,7 +72,7 @@ export default function Tasks() {
       logger.action(`タスクステータスを変更します`, { taskId, newStatus })
 
       await updateTaskStatus({
-        taskId: taskId as const,
+        taskId: taskId as Id<'tasks'>,
         status: newStatus,
       })
 
@@ -107,60 +108,71 @@ export default function Tasks() {
           placeholder="タスク名"
           value={newTask.title}
           onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-          className="w-full p-2 mb-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 border rounded mb-3"
           required
         />
         <textarea
-          placeholder="説明（任意）"
+          placeholder="詳細説明（任意）"
           value={newTask.description}
           onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-          className="w-full p-2 mb-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 border rounded mb-3"
           rows={3}
         />
         <input
           type="date"
           value={newTask.dueDate}
           onChange={(e) => setNewTask({ ...newTask, dueDate: e.target.value })}
-          className="w-full p-2 mb-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 border rounded mb-3"
         />
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >
-          作成
+          タスク作成
         </button>
       </form>
 
-      <div className="grid gap-4">
-        {tasks?.map((task) => (
-          <div key={task._id} className="bg-white p-6 rounded-lg shadow">
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="text-lg font-bold">{task.title}</h3>
-              <select
-                value={task.status}
-                onChange={(e) =>
-                  handleStatusChange(
-                    task._id,
-                    e.target.value as 'pending' | 'in_progress' | 'completed'
-                  )
-                }
-                className={`px-3 py-1 text-sm rounded ${getStatusColor(task.status)} cursor-pointer`}
-              >
-                <option value="pending">保留中</option>
-                <option value="in_progress">進行中</option>
-                <option value="completed">完了</option>
-              </select>
-            </div>
-            {task.description && <p className="text-gray-600 mb-2">{task.description}</p>}
-            {task.dueDate && (
-              <p className="text-sm text-gray-500">
-                期限: {new Date(task.dueDate).toLocaleDateString('ja-JP')}
-              </p>
-            )}
+      <div>
+        <h3 className="text-lg font-semibold mb-4">タスク一覧</h3>
+        {tasks === undefined ? (
+          <p>読み込み中...</p>
+        ) : tasks.length === 0 ? (
+          <p>タスクがありません</p>
+        ) : (
+          <div className="space-y-4">
+            {tasks.map((task) => (
+              <div key={task._id} className="bg-white p-4 rounded-lg shadow">
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className="font-semibold">{task.title}</h4>
+                  <span className={`px-2 py-1 rounded text-xs ${getStatusColor(task.status)}`}>
+                    {task.status}
+                  </span>
+                </div>
+                {task.description && <p className="text-gray-600 mb-2">{task.description}</p>}
+                {task.dueDate && <p className="text-sm text-gray-500">期限: {task.dueDate}</p>}
+                <div className="mt-3 space-x-2">
+                  <button
+                    onClick={() => handleStatusChange(task._id, 'pending')}
+                    className="text-xs bg-yellow-200 text-yellow-800 px-2 py-1 rounded"
+                  >
+                    保留
+                  </button>
+                  <button
+                    onClick={() => handleStatusChange(task._id, 'in_progress')}
+                    className="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded"
+                  >
+                    進行中
+                  </button>
+                  <button
+                    onClick={() => handleStatusChange(task._id, 'completed')}
+                    className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded"
+                  >
+                    完了
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-        {(!tasks || tasks.length === 0) && (
-          <p className="text-gray-600 text-center py-8">タスクがありません</p>
         )}
       </div>
     </div>
