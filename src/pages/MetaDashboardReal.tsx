@@ -22,7 +22,7 @@ import { CreativePerformance } from '../components/analytics/CreativePerformance
 import { DataHistoryViewer } from '../components/debug/DataHistoryViewer'
 import { ComparisonDashboard } from '../components/analytics/ComparisonDashboard'
 import { SyncSettings, type SyncSettingsData } from '../components/settings/SyncSettings'
-import { FatigueDashboard } from '../components/AdFatigue/FatigueDashboard'
+import { FatigueDashboardFull } from '../components/AdFatigue/FatigueDashboardFull'
 import { FatigueDashboardErrorBoundary } from '../components/AdFatigue/FatigueDashboardErrorBoundary'
 
 export const MetaDashboardReal: React.FC = () => {
@@ -933,7 +933,7 @@ export const MetaDashboardReal: React.FC = () => {
         {/* データ減少警告 */}
         {(() => {
           const history = manager.getActiveAccount()
-            ? MetaDataCache.getDataHistory(manager.getActiveAccount()!.accountId)
+            ? MetaDataCache.getDataHistory(manager.getActiveAccount()!.accountId) || []
             : []
           const recentReduction = history
             .slice(-5)
@@ -1231,7 +1231,7 @@ export const MetaDashboardReal: React.FC = () => {
 
         {activeTab === 'fatigue' && (
           <FatigueDashboardErrorBoundary>
-            <FatigueDashboard
+            <FatigueDashboardFull
               accountId={manager.getActiveAccount()?.accountId || 'test-account-001'}
             />
           </FatigueDashboardErrorBoundary>

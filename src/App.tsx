@@ -7,19 +7,20 @@ import Tasks from './routes/Tasks'
 import CategoryAnalysis from './routes/CategoryAnalysis'
 import DetailAnalysis from './routes/DetailAnalysis'
 import PeriodAnalysis from './routes/PeriodAnalysis'
-import { MetaDashboardReal } from './pages/MetaDashboardReal'
+// import { MetaDashboardReal } from './pages/MetaDashboardReal'
 import { MetaApiSetupSteps } from './pages/MetaApiSetupSteps'
-import { ConnectStep } from './pages/meta-setup/ConnectStep'
-import { PermissionsStep } from './pages/meta-setup/PermissionsStep'
-import { TestStep } from './pages/meta-setup/TestStep'
-import { CompleteStep } from './pages/meta-setup/CompleteStep'
+import { ConnectStepConvex } from './pages/meta-setup/ConnectStepConvex'
+import { PermissionsStepConvex } from './pages/meta-setup/PermissionsStepConvex'
+import { TestStepConvex } from './pages/meta-setup/TestStepConvex'
+import { CompleteStepConvex } from './pages/meta-setup/CompleteStepConvex'
 import { ECForceImporter } from './components/ecforce/ECForceImporter'
 import { ECForceContainer } from './pages/ECForceContainer'
 import { IntegratedDashboard } from './pages/IntegratedDashboard'
 import { ReportManagement } from './pages/ReportManagement'
 import { SettingsManagement } from './pages/SettingsManagement'
-import { FatigueDashboard } from './components/AdFatigue/FatigueDashboard'
+import { FatigueDashboardWithAccount } from './components/AdFatigue/FatigueDashboardWithAccount'
 import { FatigueEducation } from './pages/FatigueEducation'
+import { NewMetaApiTest } from './components/test/NewMetaApiTest'
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 import { vibe } from './lib/vibelogger'
@@ -55,13 +56,13 @@ function AppContent() {
           <RouteLogger />
           <Routes>
             <Route path="/" element={<UnifiedDashboard />} />
-            <Route path="/meta-dashboard" element={<MetaDashboardReal />} />
+            <Route path="/meta-dashboard" element={<UnifiedDashboard />} />
             <Route path="/meta-api-setup" element={<MetaApiSetupSteps />}>
-              <Route index element={<ConnectStep />} />
-              <Route path="connect" element={<ConnectStep />} />
-              <Route path="permissions" element={<PermissionsStep />} />
-              <Route path="test" element={<TestStep />} />
-              <Route path="complete" element={<CompleteStep />} />
+              <Route index element={<ConnectStepConvex />} />
+              <Route path="connect" element={<ConnectStepConvex />} />
+              <Route path="permissions" element={<PermissionsStepConvex />} />
+              <Route path="test" element={<TestStepConvex />} />
+              <Route path="complete" element={<CompleteStepConvex />} />
             </Route>
             <Route path="/ecforce-import" element={<ECForceImporter />} />
             <Route path="/ecforce" element={<ECForceContainer />} />
@@ -73,8 +74,9 @@ function AppContent() {
             <Route path="/period" element={<PeriodAnalysis />} />
             <Route path="/reports" element={<ReportManagement />} />
             <Route path="/settings" element={<SettingsManagement />} />
-            <Route path="/ad-fatigue" element={<FatigueDashboard accountId="test-account-001" />} />
+            <Route path="/ad-fatigue" element={<FatigueDashboardWithAccount />} />
             <Route path="/fatigue-education" element={<FatigueEducation />} />
+            <Route path="/test-new-meta-api" element={<NewMetaApiTest />} />
             <Route
               path="/media"
               element={
